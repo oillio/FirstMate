@@ -1,0 +1,18 @@
+# DRAFT, NOT TESTED. See README.md in this folder.
+# Records raw CAN frames from can0 in candump log format (ADR-0007).
+
+[Unit]
+Description=First Mate raw NMEA 2000 bus recorder
+After=network.target
+
+[Service]
+Type=simple
+ExecStartPre=/sbin/ip link set can0 up type can bitrate 250000
+WorkingDirectory=/var/lib/firstmate/captures
+# -l writes a log file named with the start time. Each line has a UNIX timestamp.
+ExecStart=/usr/bin/candump -l can0
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

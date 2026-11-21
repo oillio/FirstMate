@@ -1,0 +1,27 @@
+#!/bin/sh
+# Git hook: add a "Model:" trailer to the commit message.
+# Install once per clone: make hooks  (sets core.hooksPath to tools/git-hooks)
+#
+# Source, in order:
+#   1. The file that the Claude Code hook stamp-commit-model.sh wrote just before
+#      this commit (used only if it is less than 5 minutes old, then deleted).
+#   2. The environment variable FIRSTMATE_MODEL. Other agents (Codex, Grok)
+#      set this in their session. Example: FIRSTMATE_MODEL=gpt-5-codex
+#   3. Nothing. A commit with no trailer is a human commit.
+#
+# This hook does not block a commit. It runs even with --no-verify.
+
+msg_file="$1"
+stamp="$(git rev-parse --git-dir)/firstmate-commit-model"
+model=""
+
+if [ -f "$stamp" ]; then
+  if [ -n "$(find "$stamp" -mmin -5 2>/dev/null)" ]; then
+    model=$(head -n 1 "$stamp")
+  fi
+  rm -f "$stamp"
+fi
+[ -n "$model" ] || model="${FIRSTMATE_MODEL:-}"
+[ -n "$model" ] || exit 0
+
+git interpret-trailers --in-place --if-exists replace --trailer "Model: $model" "$msg_file"

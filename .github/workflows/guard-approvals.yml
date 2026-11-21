@@ -1,0 +1,47 @@
+name: guard-approvals
+
+# ADR-0010 rule 10. Only the repository owner can close a needs:skipper issue
+# or remove its label. This works only when agents use a different GitHub account.
+
+on:
+  issues:
+    types: [closed, unlabeled]
+
+permissions:
+  issues: write
+
+jobs:
+  reopen-closed:
+    if: >-
+      github.event.action == 'closed' &&
+      contains(github.event.issue.labels.*.name, 'needs:skipper') &&
+      github.event.sender.login != github.repository_owner
+    runs-on: ubuntu-latest
+    steps:
+      - name: Reopen the issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.issue.number }}
+          ACTOR: ${{ github.event.sender.login }}
+        run: |
+          gh issue reopen "$NUMBER" --repo "$REPO" \
+            --comment "Reopened by guard-approvals. Only the skipper can close a needs:skipper item. Closed by: $ACTOR."
+
+  restore-label:
+    if: >-
+      github.event.action == 'unlabeled' &&
+      github.event.label.name == 'needs:skipper' &&
+      github.event.sender.login != github.repository_owner
+    runs-on: ubuntu-latest
+    steps:
+      - name: Put the label back
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.issue.number }}
+          ACTOR: ${{ github.event.sender.login }}
+        run: |
+          gh issue edit "$NUMBER" --repo "$REPO" --add-label "needs:skipper"
+          gh issue comment "$NUMBER" --repo "$REPO" \
+            --body "Label restored by guard-approvals. Only the skipper can remove needs:skipper. Removed by: $ACTOR."
