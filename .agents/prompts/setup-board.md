@@ -14,6 +14,8 @@ Work in this order. Stop and ask me if a step fails. Report each command and its
    - `type:task`, `type:adr`, `type:approval`, `type:aboard`
    - `needs:skipper` (red), `source:agent`
    - `tier:L`, `tier:M`, `tier:R`
+   - `type:guard` (changes to guard files, see `tools/guard-files.txt`)
+   - `review:changes-needed` (a review ended with BLOCK or CHANGES NEEDED)
 4. Create a GitHub Project (owner: oillio) named "First Mate" with `gh project create`. Link it to the repository with `gh project link`.
 5. The Status field must have these options, in this order: Inbox, Needs skipper, Ready, In progress, In review, Done. The `gh` command cannot always edit field options. If it cannot, give me the exact steps to do it in the browser, and wait.
 6. For each unchecked item in `docs/plan/skipper-todo.md`, create one issue. Labels: `type:task` or `type:aboard`, plus `needs:skipper` when only I can do it. Add each issue to the project. Set Status to "Needs skipper" or "Ready". Put the roadmap week in the issue body.

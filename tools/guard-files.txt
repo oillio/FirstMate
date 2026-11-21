@@ -1,0 +1,19 @@
+# Guard files: the files that set agent limits and run the checks.
+# A pull request that changes one of these files must change only guard files,
+# and must have the label type:guard (tools/check_guard_pr.py).
+# Claude Code asks the skipper before it edits these files (.claude/settings.json).
+# A pattern that ends in "/**" matches the folder and all files below it.
+# Any other pattern matches one file exactly.
+.claude/**
+.github/**
+.agents/**
+AGENTS.md
+CLAUDE.md
+Makefile
+tools/guard-files.txt
+tools/check_docs.py
+tools/check_guard_pr.py
+tools/git-hooks/**
+tests/**
+eval/seeded-defects/**
+docs/process/**

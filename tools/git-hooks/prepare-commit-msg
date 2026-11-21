@@ -9,15 +9,22 @@
 #      set this in their session. Example: FIRSTMATE_MODEL=gpt-5-codex
 #   3. Nothing. A commit with no trailer is a human commit.
 #
+# If the stamp lists more than one model since the last commit, the hook also
+# adds a "Session-Models:" trailer. (The key must not start with "Model":
+# git matches trailer keys by prefix, so "Model-..." would replace "Model:".) Review such a commit with care: part of the
+# work came from a different model (for example, after an automatic switch).
+#
 # This hook does not block a commit. It runs even with --no-verify.
 
 msg_file="$1"
 stamp="$(git rev-parse --git-dir)/firstmate-commit-model"
 model=""
+used=""
 
 if [ -f "$stamp" ]; then
   if [ -n "$(find "$stamp" -mmin -5 2>/dev/null)" ]; then
-    model=$(head -n 1 "$stamp")
+    model=$(sed -n 1p "$stamp")
+    used=$(sed -n 2p "$stamp")
   fi
   rm -f "$stamp"
 fi
@@ -25,3 +32,6 @@ fi
 [ -n "$model" ] || exit 0
 
 git interpret-trailers --in-place --if-exists replace --trailer "Model: $model" "$msg_file"
+case "$used" in
+  *,*) git interpret-trailers --in-place --if-exists replace --trailer "Session-Models: $used" "$msg_file" ;;
+esac

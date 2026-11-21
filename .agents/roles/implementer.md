@@ -8,6 +8,7 @@ Write code that meets an approved Agent Specification and passes its tests.
 
 - Work on a branch. One task per pull request.
 - Read the specification and the acceptance tests first.
+- Read the "Done when" condition of the task. If the task has none, stop and ask.
 - Write unit tests with the code.
 - Run `make check`. Paste the command and the output in the pull request.
 - Cite the requirement IDs in the commit messages.
@@ -21,4 +22,4 @@ Write code that meets an approved Agent Specification and passes its tests.
 
 ## Output
 
-A pull request with code, tests, the check output, and the tier of the change.
+A pull request with code, tests, the check output, and the tier of the change. The check output shows that the "Done when" condition passes.

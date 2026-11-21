@@ -52,3 +52,4 @@ These are under evaluation. Do not treat them as rules yet.
 - Silent Drift protection: frozen eval suites with quantified floors, online proxy metrics, shadow mode, override-rate tracking.
 - "What not to build" filter for feature creep.
 - Memory authority lanes: Ratified, Observed, Working.
+- Drift tracking for the AI team: count the reviews that end with BLOCK or CHANGES NEEDED (label `review:changes-needed`) and the reverted commits, per `Model:` trailer, each month. A rising rate is an early warning. Write a script only after a few weeks of pull requests.
