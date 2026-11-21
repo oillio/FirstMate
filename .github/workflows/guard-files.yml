@@ -1,0 +1,29 @@
+name: guard-files
+
+# A pull request that changes a guard file must change only guard files and
+# must have the label type:guard. See tools/check_guard_pr.py.
+# Make this a required status check on main (docs/process/guardrails.md).
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+permissions:
+  contents: read
+
+jobs:
+  guard-files:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Guard-file rule
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
+        run: git diff --name-only "$BASE"...HEAD | python tools/check_guard_pr.py --labels "$LABELS"

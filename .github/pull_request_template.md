@@ -10,6 +10,10 @@
 
 <!-- Example: CORE-AB-02, ADR-0002 -->
 
+## Done when
+
+<!-- Copy the "Done when" condition from the issue. Show the evidence below. -->
+
 ## Checks run
 
 <!-- Paste the command and its output. Do not report a result that you did not see. -->
@@ -26,3 +30,5 @@ $ make check
 - [ ] Docs updated
 - [ ] No language model in the detection or alarm path
 - [ ] No transmission on the NMEA 2000 bus except ADR-0002 alert messages
+- [ ] Guard files changed? Then this pull request has only guard files and the label `type:guard`
+- [ ] A `Session-Models:` trailer on a commit? Then name the models here

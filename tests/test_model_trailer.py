@@ -78,6 +78,30 @@ class ModelTrailerTests(unittest.TestCase):
         self.commit("six")
         self.assertNotIn("Model:", self.commit("seven"))
 
+    def test_models_used_after_switch(self):
+        self.hook("record-model.sh", {"session_id": "s4", "model": "claude-opus-5-5"})
+        self.hook("record-model.sh", {"session_id": "s4", "to_model": "claude-opus-5", "source": "auto"})
+        self.stamp("s4")
+        message = self.commit("eight")
+        self.assertIn("Model: claude-opus-5", message)
+        self.assertIn("Session-Models: claude-opus-5-5, claude-opus-5", message)
+
+    def test_models_used_resets_after_commit(self):
+        self.hook("record-model.sh", {"session_id": "s5", "model": "claude-opus-5-5"})
+        self.hook("record-model.sh", {"session_id": "s5", "to_model": "claude-opus-5", "source": "auto"})
+        self.stamp("s5")
+        self.commit("nine")
+        self.stamp("s5")
+        message = self.commit("ten")
+        self.assertIn("Model: claude-opus-5", message)
+        self.assertNotIn("Session-Models:", message)
+
+    def test_one_model_has_no_models_used(self):
+        self.hook("record-model.sh", {"session_id": "s6", "model": "claude-opus-5-5"})
+        self.hook("record-model.sh", {"session_id": "s6", "to_model": "claude-opus-5-5", "source": "resume"})
+        self.stamp("s6")
+        self.assertNotIn("Session-Models:", self.commit("eleven"))
+
     def test_other_bash_commands_are_ignored(self):
         self.hook("stamp-commit-model.sh", {"session_id": "s1", "tool_input": {"command": "ls -la"}})
         self.assertFalse((self.root / ".git" / "firstmate-commit-model").exists())

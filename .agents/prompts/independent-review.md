@@ -14,5 +14,7 @@ Review pull request <number or branch>. Its tier is <tier>. The requirement IDs 
 4. Look for these classes first: an alarm that can never fire; a stale or invalid value used as valid; replay data that can reach the live alarm path; a fallback that hides a fault; an unhandled state or error; a language model in the alarm path.
 5. Run `make check`. Report the command and its output. If you cannot run it, say so.
 6. Do not comment on style.
+7. For tier R, give a failing test for each blocker and each major finding. Before ADR-0005, give a test case: inputs, state, expected result, actual result. A finding with no test is a question.
+8. Mark each claim that you did not confirm with [VERIFY], and say where you looked.
 
 End with one line: BLOCK, CHANGES NEEDED, or NO FINDINGS.
