@@ -102,6 +102,15 @@ class AdrIndexTests(unittest.TestCase):
         finally:
             check_docs.REQUIRE_ADR_ISSUE = old
 
+    def test_template_is_exempt_from_issue_line(self):
+        root = make_repo({"docs/decisions/0000-template.md": "# ADR-0000: Title\n\nStatus: Proposed\nIssue: #N\n"})
+        old = check_docs.REQUIRE_ADR_ISSUE
+        check_docs.REQUIRE_ADR_ISSUE = True
+        try:
+            self.assertEqual(check_docs.run(root).errors, [])
+        finally:
+            check_docs.REQUIRE_ADR_ISSUE = old
+
 
 class CommandGuardTests(unittest.TestCase):
     def test_command_pgn_in_code_fails(self):
