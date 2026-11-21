@@ -5,6 +5,7 @@ Date: 2026-11-21
 Door: One-way (it sets the shape of all code and data)
 Requirements: CORE-DP-03, CORE-DP-12, CORE-DP-13, CORE-PRN-03
 Depends on: ADR-0003
+Issue: #33
 
 ## Context
 

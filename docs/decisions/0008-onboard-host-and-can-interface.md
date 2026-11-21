@@ -5,6 +5,7 @@ Date: 2026-11-21
 Door: Two-way for the recorder. One-way for the final CORE host.
 Requirements: CORE-DP-01, CORE-REC-01, CORE-AB-04, CORE-AB-05, CORE-PRN-22, Q-07, Q-13
 Depends on: none
+Issue: #30
 
 The decision is OPEN. It is the most time-critical decision before boarding, because hardware must ship to France.
 

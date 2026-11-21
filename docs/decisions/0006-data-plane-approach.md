@@ -5,6 +5,7 @@ Date: 2026-11-21
 Door: One-way
 Requirements: CORE-DP-01 to CORE-DP-14, CORE-REC-01 to CORE-REC-06
 Depends on: ADR-0005, ADR-0007
+Issue: #28
 
 The decision is OPEN.
 

@@ -5,6 +5,7 @@ Date: 2026-11-21
 Door: Two-way
 Requirements: CORE-REC-01, CORE-REC-02, Q-08
 Depends on: ADR-0008
+Issue: #29
 
 ## Context
 

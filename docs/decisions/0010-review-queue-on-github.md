@@ -5,6 +5,7 @@ Date: 2026-11-21
 Door: Two-way
 Requirements: none
 Depends on: ADR-0001, ADR-0003, ADR-0004
+Issue: #32
 
 ## Context
 

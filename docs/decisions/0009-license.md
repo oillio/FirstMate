@@ -5,6 +5,7 @@ Date: 2026-11-21
 Door: One-way (for code that others receive under the licence)
 Requirements: none
 Depends on: none
+Issue: #31
 
 The decision is OPEN. This ADR gives facts, not legal advice. The project owner is not a lawyer, and neither is the AI that wrote this ADR.
 
