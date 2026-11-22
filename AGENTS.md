@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Instructions for every AI agent that works in this repository: Claude, ChatGPT/Codex, Grok, or other agents.
+Instructions for every AI agent that works in this repository.
 
 This file is the single source of agent instructions. Tool-specific files (for example `CLAUDE.md`) only point here. Do not copy rules into them.
 
