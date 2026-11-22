@@ -5,6 +5,7 @@ Date: 2026-11-21
 Door: One-way
 Requirements: CORE-AB-13, CORE-PL-01, CORE-DP-02
 Depends on: ADR-0006 (they affect each other; decide them together)
+Issue: #27
 
 The decision is OPEN. This ADR gives the options, the criteria, and a test to decide.
 
