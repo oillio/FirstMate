@@ -12,9 +12,6 @@ __pycache__/
 .idea/
 .vscode/
 
-# Setup bundles from chat sessions
-firstmate-protected-files*.zip
-
 # Secrets
 .env
 *.key
